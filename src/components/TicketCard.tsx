@@ -11,16 +11,23 @@ interface TicketCardProps {
 const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   const { currencyRates, currency } = useStore();
   // Preload all carrier logos
-  const carrierLogos = import.meta.glob("/public/carriers/*.png", {
+  const carrierLogos = import.meta.glob("/public/assets/carriers/*.png", {
     eager: true,
+    query: "?url",
+    import: "default",
   });
+
   const getCarrierLogo = (carrier: string): string => {
-    // Check if the carrier logo exists in the preloaded files
-    const logoPath = `/public/carriers/${carrier}.png`;
+    // Correct path for preloaded files
+    const logoPath = `/public/assets/carriers/${carrier}.png`;
+
+    // If the logo exists, return it without `/public`
     if (carrierLogos[logoPath]) {
-      return logoPath; // Return the logo path if it exists
+      return (carrierLogos[logoPath] as string).replace("/public", ""); // Remove `/public` prefix
     }
-    return "/public/carriers/default.png"; // Fallback to default logo
+
+    // Return fallback default logo
+    return "/assets/carriers/default.png";
   };
 
   const ticketPrice = new Intl.NumberFormat("ru-RU", {
@@ -84,7 +91,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
         >
           <div
             className="font-100 mt-2 pb-3 opacity-60 text-center uppercase w-full border-b-[1px] border-gray-400 relative
-          after:absolute after:block after:w-[20px] after:h-[15px] after:bg-white after:bg-[url('/public/plane.svg')] after:bg-no-repeat after:bg-center after:bg-contain after:right-0 after:-bottom-[7px] after:transition-transform after:duration-300
+          after:absolute after:block after:w-[20px] after:h-[15px] after:bg-white after:bg-[url('/assets/plane.svg')] after:bg-no-repeat after:bg-center after:bg-contain after:right-0 after:-bottom-[7px] after:transition-transform after:duration-300
           group-hover:after:translate-x-2"
           >
             {ticket.stops === 0

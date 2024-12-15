@@ -1,6 +1,6 @@
 import React from "react";
 
-import LogoImage from "/public/logo.svg";
+import LogoImage from "/assets/logo.svg";
 
 const Logo = () => {
   return (
