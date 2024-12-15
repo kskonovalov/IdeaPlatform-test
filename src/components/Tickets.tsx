@@ -8,23 +8,28 @@ import Loader from "@/components/Loader";
 const Tickets = () => {
   const { transfers, loading, setLoading } = useStore();
 
+  const sortTickets = (tickets: Ticket[]): Ticket[] => {
+    return [...tickets].sort((a, b) => {
+      return a.price - b.price; // Sort by price (ascending)
+    });
+  };
+
   useEffect(() => {
     setLoading(true);
     fetchTickets(transfers)
-      .then(setTickets)
+      .then((fetchedTickets) => {
+        const sortedTickets = sortTickets(fetchedTickets);
+        setTickets(sortedTickets);
+      })
       .then(() => setLoading(false));
   }, [transfers]);
 
   const [tickets, setTickets] = useState<Ticket[]>([]);
-  const filteredTickets = tickets.filter(
-    (ticket) => !transfers.length || transfers.includes(ticket.stops),
-  );
 
   if (loading) return <Loader />;
-
   return (
     <div className="flex flex-col gap-8">
-      {filteredTickets.map((ticket, index) => (
+      {tickets.map((ticket, index) => (
         <TicketCard key={index} ticket={ticket} />
       ))}
     </div>
