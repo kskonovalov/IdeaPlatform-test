@@ -80,6 +80,29 @@ A simple React-based tickets filtering application built as a test task. The app
 
 ---
 
+## Original task
+
+
+You need to create a ticketing page with filters (as in the mockup below).
+below).
+The following tasks should be performed:
+1. Ticket renderer (#task1)
+Use React to render tickets with data,
+sorted by price, from the tickets.json file
+2. Ticket Filtering (#task2)
+Filter tickets in the output by number of connections.
+Conditions must be met when executing tasks:
+- Use JavaScript/TypeScript;
+- Work in browsers: IE 11, Chrome;
+For convenience you can use any auxiliary
+libraries. Conformity to the sample layout in the picture and
+any additional features of the application are welcome.
+
+## Mockup
+![Design Sample](public/design-sample.png)
+
+---
+
 ## License
 
 This project is for test purposes only.
