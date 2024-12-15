@@ -22,7 +22,7 @@ const App = () => {
         <Logo />
       </header>
       <main
-        className={`flex gap-8 m-auto w-container max-w-full
+        className={`flex gap-8 m-auto w-container max-w-full min-h-[90svh]
       max-lg:flex-wrap
       `}
       >
@@ -40,6 +40,16 @@ const App = () => {
           <Tickets />
         </section>
       </main>
+      <footer className={`text-center pt-20 text-text text-xs`}>
+        Made by{" "}
+        <a
+          href="https://kskonovalov.me/"
+          className={`text-text transition-all duration-300 hover:text-accent`}
+          target="_blank"
+        >
+          Konstantin Konovalov
+        </a>
+      </footer>
     </div>
   );
 };

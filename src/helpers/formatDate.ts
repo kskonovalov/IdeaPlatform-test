@@ -3,6 +3,10 @@ const formatDate = (inputDate: string): string => {
   const [day, month, year] = inputDate.split(".");
   const date = new Date(`20${year}-${month}-${day}`); // Assuming 21st century
 
+  if (isNaN(date.getTime())) {
+    return "-";
+  }
+
   // Format individual parts
   const formatterDay = new Intl.DateTimeFormat("ru-RU", {
     day: "numeric",
