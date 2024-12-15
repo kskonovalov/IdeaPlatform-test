@@ -26,6 +26,9 @@ module.exports = {
         l: "30px",
         xl: "40px",
       },
+      width: {
+        container: "1400px",
+      },
       boxShadow: {
         card: "0 0 40px rgba(0, 0, 0, 0.4)",
       },

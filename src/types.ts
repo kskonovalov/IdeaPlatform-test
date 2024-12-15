@@ -11,7 +11,3 @@ export interface Ticket {
   stops: number;
   price: number;
 }
-
-export interface Filters {
-  [key: number]: boolean;
-}

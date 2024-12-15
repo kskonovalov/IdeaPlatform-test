@@ -1,39 +1,32 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import Logo from "@/components/Logo";
-import TicketCard from "@/components/TicketCard";
-import FilterPanel from "@/components/FilterPanel";
+import Sidebar from "@/components/Sidebar";
+import Tickets from "@/components/Tickets";
+import { fetchCurrencies } from "@/services/fetch-currencies";
+import { useStore } from "@/store/useStore";
 
-import { fetchTickets } from "./services/api";
-import { Ticket, Filters } from "./types";
-
-const App: React.FC = () => {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [filters, setFilters] = useState<Filters>({});
-
+const App = () => {
+  const { setCurrencyRates } = useStore();
+  // load currency rates on page load
   useEffect(() => {
-    fetchTickets().then(setTickets);
+    const loadCurrencies = async () => {
+      const rates = await fetchCurrencies();
+      setCurrencyRates(rates as Record<string, number>);
+    };
+    loadCurrencies();
   }, []);
-
-  const filteredTickets = tickets.filter((ticket) =>
-    Object.keys(filters).some(
-      (key) => filters[Number(key)] && ticket.stops === Number(key),
-    ),
-  );
 
   return (
     <div className="min-h-screen bg-background p-6">
       <header className="py-4">
         <Logo />
       </header>
-      <main className="flex">
-        <div className="w-1/3">
-          <FilterPanel filters={filters} setFilters={setFilters} />
+      <main className="flex gap-8 m-auto w-container max-w-full">
+        <div className="w-3/12">
+          <Sidebar />
         </div>
-        <section className="w-2/3">
-          {filteredTickets.map((ticket, index) => (
-            <TicketCard key={index} ticket={ticket} />
-          ))}
+        <section className="w-9/12 flex flex-col gap-m">
+          <Tickets />
         </section>
       </main>
     </div>
