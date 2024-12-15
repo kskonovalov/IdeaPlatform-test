@@ -10,10 +10,10 @@ const Tickets = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchTickets()
+    fetchTickets(transfers)
       .then(setTickets)
       .then(() => setLoading(false));
-  }, []);
+  }, [transfers]);
 
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const filteredTickets = tickets.filter(
