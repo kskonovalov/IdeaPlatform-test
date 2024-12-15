@@ -21,11 +21,22 @@ const App = () => {
       <header className="py-4">
         <Logo />
       </header>
-      <main className="flex gap-8 m-auto w-container max-w-full">
-        <div className="w-3/12">
+      <main
+        className={`flex gap-8 m-auto w-container max-w-full
+      max-lg:flex-wrap
+      `}
+      >
+        <div
+          className={`w-3/12
+        max-lg:w-full`}
+        >
           <Sidebar />
         </div>
-        <section className="w-9/12 flex flex-col gap-m">
+        <section
+          className={`w-9/12 flex flex-col gap-m
+        max-lg:w-full
+        `}
+        >
           <Tickets />
         </section>
       </main>

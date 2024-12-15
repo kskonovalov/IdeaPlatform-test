@@ -31,22 +31,45 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   const ticketPriceSymbol = CurrencySymbols[currency as Currency];
 
   return (
-    <div className="group bg-white shadow rounded-md flex max-md:flex-wrap transition-shadow duration-300 hover:shadow-xl">
-      <div className="flex flex-col items-center justify-center w-4/12 border-r-[1px] border-gray-100 center p-8">
+    <div className="group bg-white shadow rounded-md flex max-lg:flex-wrap transition-shadow duration-300 hover:shadow-xl">
+      <div
+        className={`flex flex-col items-center justify-center w-4/12 border-r-[1px] border-gray-100 center p-8
+      max-lg:w-full
+      `}
+      >
         <img
           src={getCarrierLogo(ticket.carrier)}
           alt={ticket.carrier}
           className="w-full h-auto max-h-[70px] object-contain mb-4"
         />
-        <button className="bg-accent transition-all duration-300 text-xl text-white px-4 py-4 rounded-md mt-4 w-full border-0 hover:bg-primary">
+        <button
+          className={`bg-accent transition-all duration-300 text-xl text-white px-4 py-4 rounded-md mt-4 border-0 hover:bg-primary w-[300px]
+        lg:w-full
+        `}
+        >
           Купить
           <br /> за {ticketPrice}
           {ticketPriceSymbol}
         </button>
       </div>
-      <div className="flex justify-between grow text-text p-xl">
-        <div className="w-3/12">
-          <div className="text-6xl mb-4">{ticket.departure_time}</div>
+      <div
+        className={`flex justify-between grow text-text p-xl
+      max-md:flex-col max-md:gap-4 max-md:items-center max-md:text-center
+      `}
+      >
+        <div
+          className={`w-3/12
+        max-md:w-full
+        `}
+        >
+          <div
+            className={`text-6xl mb-4
+          max-lg:text-4xl
+          max-md:text-2xl
+          `}
+          >
+            {ticket.departure_time}
+          </div>
           <div className="pl-2 mb-1">
             {ticket.origin}, {ticket.origin_name}
           </div>
@@ -54,7 +77,11 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
             {formatDate(ticket.departure_date)}
           </div>
         </div>
-        <div className="w-3/12">
+        <div
+          className={`w-3/12
+        max-md:w-full
+        `}
+        >
           <div
             className="font-100 mt-2 pb-3 opacity-60 text-center uppercase w-full border-b-[1px] border-gray-400 relative
           after:absolute after:block after:w-[20px] after:h-[15px] after:bg-white after:bg-[url('/public/plane.svg')] after:bg-no-repeat after:bg-center after:bg-contain after:right-0 after:-bottom-[7px] after:transition-transform after:duration-300
@@ -67,8 +94,19 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
                 : `${ticket.stops} пересадки`}
           </div>
         </div>
-        <div className="w-3/12">
-          <div className="text-6xl mb-4">{ticket.arrival_time}</div>
+        <div
+          className={`w-3/12
+        max-md:w-full
+        `}
+        >
+          <div
+            className={`text-6xl mb-4
+          max-lg:text-4xl
+          max-md:text-2xl
+          `}
+          >
+            {ticket.arrival_time}
+          </div>
           <div className="pl-2 mb-1">
             {ticket.destination_name}, {ticket.destination}
           </div>

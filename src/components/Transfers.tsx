@@ -1,4 +1,5 @@
 import React from "react";
+import CheckMark from "../assets/images/check_mark.svg?react";
 import { useStore } from "@/store/useStore";
 
 const TRANSFERS_OPTIONS = [
@@ -11,10 +12,14 @@ const TRANSFERS_OPTIONS = [
 const Transfers: React.FC = () => {
   const { transfers, setTransfers } = useStore();
 
-  const labelClasses = "group items-center gap-4 flex flex-wrap";
-  const checkBoxClasses =
-    "form-checkbox text-primary w-[20px] h-[20px] bg-none";
-  const textClasses = "text-text cursor-pointer select-none text-base";
+  const labelClasses =
+    "group flex items-center justify-between space-x-2 cursor-pointer";
+  const checkboxClasses = `
+  w-5 h-5 border rounded-sm border-border bg-white flex items-center justify-center transition-all duration-300
+`;
+  const textClasses = "text-text select-none text-base";
+  const iconClasses =
+    "transition-all duration-300 w-4 h-4 fill-primary text-primary";
 
   const handleTransferChange = (value: number) => {
     if (transfers.includes(value)) {
@@ -26,40 +31,62 @@ const Transfers: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <label className={labelClasses}>
+      <label className={`${labelClasses} after:block after:grow`}>
         <input
           type="checkbox"
           checked={!transfers.length}
           onChange={() => setTransfers([])}
-          className={`${checkBoxClasses}
-              ${!transfers.length ? "border-primary" : "border-gray-300"}
-              `}
+          className="hidden"
         />
+        <span
+          className={`
+        ${checkboxClasses}
+        ${!transfers.length ? "bg-blue-100 border-primary" : ""}
+      `}
+        >
+          <CheckMark
+            title="check"
+            className={`${iconClasses} 
+              ${!transfers.length ? "opacity-100" : "opacity-0"}
+             `}
+          />
+        </span>
         <span className={textClasses}>Все</span>
       </label>
       {TRANSFERS_OPTIONS.map((filter) => {
         const isChecked = transfers.includes(filter.value);
         return (
-          <label key={filter.value} className={labelClasses}>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={() => handleTransferChange(filter.value)}
-              className={`${checkBoxClasses}
-              ${isChecked ? "border-primary" : "border-gray-300"}
-              `}
-            />
-            <span className="text-text cursor-pointer select-none text-base">
-              {filter.label}
-            </span>
+          <div key={filter.value} className={labelClasses}>
+            <label className={labelClasses}>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => handleTransferChange(filter.value)}
+                className="hidden" // Hides the native checkbox
+              />
+              <span
+                className={`
+        ${checkboxClasses}
+        ${isChecked ? "bg-blue-100 border-primary" : ""}
+      `}
+              >
+                <CheckMark
+                  title="check"
+                  className={`${iconClasses} 
+              ${isChecked ? "opacity-100" : "opacity-0"}
+             `}
+                />
+              </span>
+              <span className={textClasses}>{filter.label}</span>
+            </label>
             <button
-              className={`text-primary uppercase transition-all duration-300 opacity-0 bg-transparent ml-auto border-0 p-0
-               group-hover:opacity-100 group-hover:border-0 hover:text-accent`}
+              className="text-primary uppercase transition-all duration-300 opacity-0 bg-transparent ml-auto border-0 p-0 text-sm
+               group-hover:opacity-100 group-hover:border-0 hover:text-accent"
               onClick={() => setTransfers([filter.value])}
             >
               Только
             </button>
-          </label>
+          </div>
         );
       })}
     </div>
