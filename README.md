@@ -52,6 +52,10 @@ A simple React-based tickets filtering application built as a test task. The app
 3. **Neat preloader**:
     - While tickets are being loaded, a neat preloader is displayed.
 
+4. **Company logo**:
+    - If the company logo is not provided in the data, a default logo is displayed
+
+5. **Responsive Design & Neat transitions**
 
 ---
 
